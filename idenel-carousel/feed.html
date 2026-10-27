@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IDENEL Feed Carousel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--bg:#F7F3EE;--ink:#151413;--ink-2:#3E3B37;--gold:#A9844C;--line:#C9B08A;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#ccc;font-family:var(--sans);color:var(--ink);display:flex;flex-direction:column;gap:30px;padding:30px;align-items:center}
+/* 1080x1350 (4:5) feed / carousel card */
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:var(--bg);flex:none}
+
+/* right visual, fading into the cream background on the left */
+.visual{position:absolute;right:0;top:0;width:620px;height:100%}
+.visual img.photo{width:100%;height:100%;object-fit:cover;object-position:center top}
+.visual::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--bg) 0%,rgba(247,243,238,.85) 18%,rgba(247,243,238,0) 48%),
+             linear-gradient(0deg,rgba(247,243,238,.55) 0%,rgba(247,243,238,0) 22%)}
+/* product scene: white arch + plinth */
+.arch{position:absolute;left:150px;right:50px;top:170px;bottom:150px;border-radius:300px 300px 0 0;
+  background:linear-gradient(180deg,#FFFFFF 0%,#F3EDE4 100%);box-shadow:0 30px 60px rgba(80,62,35,.08)}
+.plinth{position:absolute;left:120px;right:20px;bottom:120px;height:70px;border-radius:50%;
+  background:linear-gradient(180deg,#FFFFFF,#E7DECF);box-shadow:0 18px 36px rgba(80,62,35,.14)}
+.prod{position:absolute;mix-blend-mode:multiply}
+
+.logo{position:absolute;left:68px;top:70px;z-index:3}
+.logo b{display:block;font-family:var(--serif);font-weight:600;font-size:38px;letter-spacing:.3em;line-height:1}
+.logo span{display:block;margin-top:10px;font-size:13px;font-weight:600;letter-spacing:.32em}
+
+.copy{position:absolute;left:68px;top:255px;width:560px;z-index:3;display:flex;flex-direction:column}
+.eyebrow{font-size:22px;font-weight:600;letter-spacing:.12em;color:var(--gold);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:600;line-height:1.0;margin:26px 0 30px;letter-spacing:-.005em}
+.sub{font-size:26px;line-height:1.42;font-weight:500;color:var(--ink-2);width:500px}
+.rule{width:66px;height:2px;background:var(--line);margin:44px 0 40px}
+.date{display:flex;align-items:center;gap:26px}
+.date .d{font-family:var(--serif);font-size:118px;font-weight:600;line-height:.8;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+.date i{width:2px;height:96px;background:var(--line)}
+.date .m{font-size:34px;font-weight:700}
+.date .t{font-size:25px;font-weight:500;color:var(--ink-2);margin-top:10px}
+
+.pill{position:absolute;left:68px;top:1082px;z-index:3;display:inline-flex;align-items:center;gap:16px;background:#fff;
+  border-radius:40px;padding:22px 30px;font-size:23px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.pill::before{content:"";width:12px;height:12px;border-radius:50%;background:#C2512F}
+.btn{position:absolute;left:68px;top:1180px;z-index:3;display:inline-flex;align-items:center;gap:20px;background:var(--ink);color:#fff;
+  border-radius:50px;padding:26px 44px;font-size:29px;font-weight:600}
+.dots{position:absolute;right:56px;bottom:62px;z-index:3;display:flex;gap:9px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(21,20,19,.22)}
+.dots i.on{background:var(--ink);width:26px;border-radius:5px}
+</style>
+</head>
+<body>
+<script>
+const T = {
+  ru: {
+    month: "октября", time: "9:00 · Ташкент",
+    pill: "Количество мест ограничено — запишитесь заранее",
+    btn: "Зарегистрироваться",
+    slides: [
+      { eyebrow: "Для косметологов и дерматологов", h: "Профессиональный семинар IDENEL", size: 72,
+        sub: "Теория, практика и профессиональные технологии ухода за кожей" },
+      { eyebrow: "Тема 1", h: "Технологии работы с микроиглами", size: 80,
+        sub: "Профессиональный подход и технологии — вблизи" },
+      { eyebrow: "Тема 2", h: "Подбор средств домашнего ухода", size: 84,
+        sub: "Этапы ухода за кожей и продукты IDENEL" },
+      { eyebrow: "Тема 3", h: "Теория и практика — в одном семинаре", size: 80,
+        sub: "Практическая демонстрация кабинетных косметологических процедур" },
+      { eyebrow: "Каждому участнику", h: "Сертификат семинара", size: 92,
+        sub: "По завершении семинара каждый участник получает сертификат" },
+    ]
+  },
+  uz: {
+    month: "oktabr", time: "09:00 · Toshkent",
+    pill: "O‘rinlar cheklangan — oldindan yoziling",
+    btn: "Ro‘yxatdan o‘tish",
+    slides: [
+      { eyebrow: "Kosmetolog va dermatologlar uchun", h: "IDENEL professional seminari", size: 88,
+        sub: "Nazariya, amaliyot va professional skincare texnologiyalari" },
+      { eyebrow: "1-mavzu", h: "Mikroignalar bilan ishlash texnologiyalari", size: 80,
+        sub: "Professional yondashuv va texnologiyalar bilan yaqindan tanishing" },
+      { eyebrow: "2-mavzu", h: "Uy parvarishi vositalarini to‘g‘ri tanlash", size: 80,
+        sub: "Terini parvarishlash bosqichlari va IDENEL mahsulotlari bilan tanishing" },
+      { eyebrow: "3-mavzu", h: "Nazariya va amaliyot — bir seminarda", size: 82,
+        sub: "Kabinet sharoitidagi kosmetologik protseduralarning amaliy namoyishi" },
+      { eyebrow: "Har bir ishtirokchiga", h: "Seminar sertifikati", size: 92,
+        sub: "Seminar yakunida har bir ishtirokchiga sertifikat beriladi" },
+    ]
+  }
+};
+
+// right-hand visuals, shared by both languages
+const scene = (inner) => `<div class="arch"></div><div class="plinth"></div>${inner}`;
+const V = [
+  `<img class="photo" src="assets/photo-presenter.jpg">`,
+  scene(`<img class="prod" src="assets/needlekit.png" style="left:235px;top:300px;height:780px">`),
+  scene(`<img class="prod" src="assets/toner.png" style="left:180px;top:560px;height:600px">
+         <img class="prod" src="assets/serum.png" style="left:340px;top:640px;height:520px">
+         <img class="prod" src="assets/spf.png" style="left:460px;top:580px;height:580px">
+         <img class="prod" src="assets/jar_moist.png" style="left:265px;top:1010px;height:170px;z-index:2">`),
+  scene(`<img class="prod" src="assets/mist.png" style="left:175px;top:640px;height:520px">
+         <img class="prod" src="assets/cc.png" style="left:300px;top:590px;height:570px">
+         <img class="prod" src="assets/eyecream.png" style="left:440px;top:560px;height:600px">
+         <img class="prod" src="assets/tube.png" style="left:478px;top:600px;height:560px;z-index:1">
+         <img class="prod" src="assets/jar_repair.png" style="left:330px;top:1010px;height:170px;z-index:2">`),
+  `<img class="photo" src="assets/photo-certificate.jpg" style="object-position:center bottom">`,
+];
+
+const lang = new URLSearchParams(location.search).get("lang") || "ru";
+const L = T[lang];
+document.documentElement.lang = lang;
+L.slides.forEach((s, i) => {
+  document.body.insertAdjacentHTML("beforeend", `
+  <section class="slide">
+    <div class="visual">${V[i]}</div>
+    <div class="logo"><b>IDENEL</b><span>PROFESSIONAL</span></div>
+    <div class="copy">
+      <div class="eyebrow">${s.eyebrow}</div>
+      <h1 style="font-size:${s.size}px">${s.h}</h1>
+      <p class="sub">${s.sub}</p>
+      <div class="rule"></div>
+      <div class="date"><div class="d">31</div><i></i><div><div class="m">${L.month}</div><div class="t">${L.time}</div></div></div>
+    </div>
+    <div class="pill">${L.pill}</div>
+    <div class="btn">${L.btn}
+      <svg width="30" height="18" viewBox="0 0 30 18" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9 H27"/><path d="M20 2 L27 9 L20 16"/></svg></div>
+    <div class="dots">${[0,1,2,3,4].map(k => `<i class="${k===i?'on':''}"></i>`).join("")}</div>
+  </section>`);
+});
+</script>
+</body>
+</html>
