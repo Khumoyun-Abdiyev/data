@@ -8,7 +8,7 @@ const FPS = 30;
   for (const lang of langs) {
     const tmp = path.join(__dirname, 'export', 'video', `frames-${lang}`); fs.mkdirSync(tmp, { recursive: true });
     const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
-    await p.goto('file://' + path.join(__dirname, 'video.html') + '?lang=' + lang, { waitUntil: 'networkidle' });
+    await p.goto('file://' + path.join(__dirname, 'video.html') + '?lang=' + lang + (process.env.DUR ? '&d=' + process.env.DUR : ''), { waitUntil: 'networkidle' });
     await p.evaluate(() => document.fonts.ready);
     const dur = await p.evaluate(() => window.DURATION);
     const stage = await p.$('#stage');

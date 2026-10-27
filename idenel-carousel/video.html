@@ -107,11 +107,13 @@ const V = [
   `<div class="plinth"></div>${P("mist",170,440,.25)}${P("cc",300,480,.4)}${P("eyecream",470,500,.55)}${P("tube",570,470,.7)}${P("jar_repair",680,180,.85)}`,
   `<img class="photo" src="assets/photo-certificate.jpg" style="object-position:50% 96%">`,
 ];
-const SCENE = 3, CTA = 5;           // seconds per topic scene, CTA hold
+// seconds per scene (5 topic scenes + CTA); override with ?d=3,3,3,3,3,5 to fit a voiceover
+const DUR = (new URLSearchParams(location.search).get("d") || "3,3,3,3,3,5").split(",").map(Number);
+const START = DUR.map((_, i) => DUR.slice(0, i).reduce((a, b) => a + b, 0));
 const lang = new URLSearchParams(location.search).get("lang") || "uz";
 const L = T[lang], st = document.getElementById("stage");
 L.s.forEach((s, i) => st.insertAdjacentHTML("beforeend", `
-  <section class="scene" style="--s:${i*SCENE}s;--d:${SCENE}s">
+  <section class="scene" style="--s:${START[i]}s;--d:${DUR[i]}s">
     <div class="box">${V[i]}</div>
     <div class="txt">
       <div class="eyebrow up" style="--o:.25s">${s.e}</div>
@@ -119,9 +121,9 @@ L.s.forEach((s, i) => st.insertAdjacentHTML("beforeend", `
       ${s.sub ? `<p class="sub up" style="--o:.6s">${s.sub}</p>` : ""}
     </div>
   </section>`));
-const cs = L.s.length * SCENE;
+const cs = START[5];
 st.insertAdjacentHTML("beforeend", `
-  <section class="scene last cta" style="--s:${cs}s;--d:${CTA}s">
+  <section class="scene last cta" style="--s:${cs}s;--d:${DUR[5]}s">
     <div class="bigdate">
       <div class="d up" style="--o:.1s">31</div>
       <div class="m up" style="--o:.3s">${L.month.toUpperCase()}</div>
@@ -133,7 +135,9 @@ st.insertAdjacentHTML("beforeend", `
     <div class="btnw up" style="--o:1s"><div class="btn">${L.btn}
       <svg width="40" height="22" viewBox="0 0 40 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11 H36"/><path d="M27 2 L36 11 L27 20"/></svg></div></div>
   </section>`);
-window.DURATION = cs + CTA;
+window.DURATION = cs + DUR[5];
+// progress bar spans the five topic scenes
+st.querySelectorAll(".bar, .bar i").forEach(e => e.style.animationDuration = cs + "s");
 </script>
 </body>
 </html>
