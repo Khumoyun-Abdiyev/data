@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>IDENEL Story RU</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--ink:#1F1E1C;--ink-2:#55514B;--line:#E4DCCF;--gold:#A9844C;--gold-2:#CDB287;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#DCD7CF;font-family:var(--sans);color:var(--ink)}
+/* 1080x1920 Stories/Reels. Meta safe zone: keep text out of top 270px and bottom 380px (CTA sticker) */
+.story{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:
+    radial-gradient(60% 22% at 50% 73%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg,#F8F5EF 0%,#F1EADF 55%,#D9C6A6 100%)}
+.story::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(169,132,76,.035) 0 1px,transparent 1px 120px)}
+.frame{position:absolute;left:40px;right:40px;top:250px;bottom:40px;border:1px solid rgba(169,132,76,.35)}
+
+.brand{position:absolute;left:0;right:0;top:300px;text-align:center}
+.brand .m{font-family:var(--serif);font-weight:600;font-size:64px;letter-spacing:.34em;padding-left:.34em;line-height:1}
+.brand .s{margin-top:16px;display:inline-flex;align-items:center;gap:16px;font-size:18px;font-weight:700;letter-spacing:.24em;color:var(--gold)}
+.brand .s::before,.brand .s::after{content:"";width:40px;height:1.5px;background:var(--gold)}
+
+h1{position:absolute;left:60px;right:60px;top:460px;text-align:center;font-size:84px;line-height:1.02;font-weight:800;letter-spacing:-.01em}
+h1 .gold{color:var(--gold)}
+.lead{position:absolute;left:120px;right:120px;top:740px;text-align:center;font-size:31px;line-height:1.38;font-weight:500;color:var(--ink-2)}
+
+.card{position:absolute;left:80px;right:80px;top:850px;background:#fff;border-radius:22px;padding:26px 40px 14px;
+  box-shadow:0 30px 60px rgba(80,62,35,.14)}
+.card h3{font-size:18px;font-weight:700;letter-spacing:.22em;color:var(--gold);margin-bottom:8px}
+.card li{list-style:none;display:flex;align-items:center;gap:20px;padding:15px 0;border-top:1px solid var(--line);
+  font-size:28px;line-height:1.25;font-weight:600}
+.card li:first-of-type{border-top:0}
+.card em{flex:none;width:44px;height:44px;border-radius:50%;background:var(--gold);color:#fff;font-style:normal;
+  display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700}
+
+.chips{position:absolute;left:80px;right:80px;top:1232px;display:grid;grid-template-columns:1.25fr 1fr;gap:14px}
+.chip{height:76px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:23px;font-weight:700;text-align:left;line-height:1.15}
+.chip.g{background:linear-gradient(100deg,#B38E55,#9C773F);color:#fff;box-shadow:0 16px 30px rgba(130,95,40,.25)}
+.chip.o{background:rgba(255,255,255,.75);border:1.5px solid var(--gold);color:var(--ink)}
+.seal{flex:none;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF1D6,#E2C48F 60%,#C9A46A);border:2px solid rgba(255,255,255,.8)}
+
+.stage{position:absolute;left:0;right:0;top:1330px;height:300px}
+.plinth{position:absolute;left:170px;right:170px;top:262px;height:56px;border-radius:50%;
+  background:linear-gradient(180deg,#FFFFFF,#E8DCC8);box-shadow:0 20px 40px rgba(80,62,35,.18)}
+.prod{position:absolute;mix-blend-mode:multiply;bottom:22px}
+.city{position:absolute;left:0;right:0;bottom:84px;text-align:center;font-size:19px;font-weight:700;letter-spacing:.24em;color:#7A6040;opacity:.85}
+</style>
+</head>
+<body>
+<section class="story" id="story">
+  <div class="frame"></div>
+
+  <div class="brand"><div class="m">IDENEL</div><div class="s">ПРОФЕССИОНАЛЬНЫЙ СЕМИНАР</div></div>
+
+  <h1>ВНИМАНИЮ<br>КОСМЕТОЛОГОВ<br><span class="gold">И ДЕРМАТОЛОГОВ!</span></h1>
+  <p class="lead">Теория, практика и профессиональные технологии ухода за кожей</p>
+
+  <div class="card">
+    <h3>ПРОГРАММА СЕМИНАРА</h3>
+    <ul>
+      <li><em>1</em>Технологии работы с микроиглами</li>
+      <li><em>2</em>Подбор средств домашнего ухода</li>
+      <li><em>3</em>Демонстрация кабинетных процедур</li>
+      <li><em>4</em>Применение продуктов IDENEL</li>
+    </ul>
+  </div>
+
+  <div class="chips">
+    <div class="chip g"><span class="seal"></span>Сертификат<br>каждому участнику</div>
+    <div class="chip o">Количество мест<br>ограничено</div>
+  </div>
+
+  <div class="stage">
+    <div class="plinth"></div>
+    <img class="prod" src="assets/cc.png"        style="left:232px;height:228px">
+    <img class="prod" src="assets/spf.png"       style="left:322px;height:262px">
+    <img class="prod" src="assets/needlekit.png" style="left:450px;height:300px;z-index:2">
+    <img class="prod" src="assets/serum.png"     style="left:632px;height:226px">
+    <img class="prod" src="assets/tube.png"      style="left:724px;height:256px">
+  </div>
+
+  <div class="city">г. ТАШКЕНТ</div>
+</section>
+</body>
+</html>
