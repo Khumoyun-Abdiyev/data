@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IDENEL Seminar Video</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+/* 1080x1920 (9:16) lead-ad video. Animations are paused; render-video.js scrubs them frame by frame.
+   Meta safe zone: text stays between y=270 and y=1540. */
+:root{--bg:#F7F3EE;--ink:#151413;--ink-2:#3E3B37;--gold:#A9844C;--line:#C9B08A;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",Arial,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:var(--sans);color:var(--ink);
+  background:radial-gradient(90% 50% at 50% 35%,#FFFFFF 0%,var(--bg) 60%,#EFE7DB 100%)}
+*{animation-play-state:paused !important}
+
+.logo{position:absolute;left:0;right:0;top:290px;text-align:center;z-index:5}
+.logo b{display:block;font-family:var(--serif);font-weight:600;font-size:46px;letter-spacing:.32em;padding-left:.32em;line-height:1}
+.logo span{display:block;margin-top:10px;font-size:15px;font-weight:600;letter-spacing:.36em;padding-left:.36em}
+
+.scene{position:absolute;inset:0;opacity:0;animation:sc var(--d) linear var(--s) both}
+@keyframes sc{0%{opacity:0}7%{opacity:1}93%{opacity:1}100%{opacity:0}}
+.scene.last{animation-name:scLast}
+@keyframes scLast{0%{opacity:0}7%{opacity:1}100%{opacity:1}}
+
+.box{position:absolute;left:60px;right:60px;top:400px;height:690px;border-radius:30px;overflow:hidden;
+  background:linear-gradient(180deg,#FFFFFF,#F1EADF);box-shadow:0 30px 70px rgba(80,62,35,.12);
+  animation:boxIn .8s cubic-bezier(.2,.7,.2,1) var(--s) both}
+@keyframes boxIn{from{opacity:0;transform:translateY(40px) scale(.97)}to{opacity:1;transform:none}}
+.box img.photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  animation:kb var(--d) linear var(--s) both}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.14)}}
+.box .plinth{position:absolute;left:120px;right:120px;bottom:40px;height:70px;border-radius:50%;
+  background:linear-gradient(180deg,#FFFFFF,#E5DACA);box-shadow:0 16px 30px rgba(80,62,35,.14)}
+.prod{position:absolute;bottom:72px;mix-blend-mode:multiply;
+  animation:pop .7s cubic-bezier(.2,.8,.2,1.15) calc(var(--s) + var(--o,0s)) both}
+@keyframes pop{from{opacity:0;transform:translateY(60px) scale(.9)}to{opacity:1;transform:none}}
+
+.txt{position:absolute;left:80px;right:80px;top:1140px}
+.up{animation:up .75s cubic-bezier(.2,.7,.2,1) calc(var(--s) + var(--o,0s)) both}
+@keyframes up{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:28px;font-weight:700;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+h1{font-family:var(--serif);font-weight:600;line-height:1.0;margin-top:18px;font-size:92px}
+.sub{margin-top:22px;font-size:32px;line-height:1.38;font-weight:500;color:var(--ink-2)}
+
+/* final CTA scene */
+.cta .bigdate{position:absolute;left:0;right:0;top:470px;text-align:center}
+.bigdate .d{font-family:var(--serif);font-size:300px;font-weight:600;line-height:.85;font-feature-settings:"lnum" 1}
+.bigdate .m{font-size:56px;font-weight:800;letter-spacing:.06em;margin-top:6px}
+.bigdate .t{font-size:38px;font-weight:600;color:var(--ink-2);margin-top:14px}
+.bigdate .rule{width:90px;height:3px;background:var(--line);margin:40px auto 0}
+.cta .h{position:absolute;left:80px;right:80px;top:1030px;text-align:center;font-family:var(--serif);font-weight:600;font-size:78px;line-height:1.02}
+.cta .pill{position:absolute;left:0;right:0;top:1280px;display:flex;justify-content:center}
+.pill span{display:inline-flex;align-items:center;gap:16px;background:#fff;border-radius:44px;padding:22px 34px;font-size:28px;font-weight:600;
+  box-shadow:0 10px 30px rgba(0,0,0,.07)}
+.pill span::before{content:"";width:14px;height:14px;border-radius:50%;background:#C2512F}
+.cta .btnw{position:absolute;left:0;right:0;top:1395px;display:flex;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:22px;background:var(--ink);color:#fff;border-radius:60px;padding:32px 60px;font-size:38px;font-weight:700;
+  animation:pulse 1.2s ease-in-out calc(var(--s) + 1.4s) infinite}
+@keyframes pulse{0%,100%{transform:scale(1);box-shadow:0 14px 30px rgba(0,0,0,.18)}50%{transform:scale(1.06);box-shadow:0 22px 44px rgba(0,0,0,.28)}}
+
+/* thin progress bar (scene counter feel) */
+.bar{position:absolute;left:80px;right:80px;top:1100px;height:3px;background:rgba(169,132,76,.18);z-index:4;opacity:0;
+  animation:barShow 15s linear 0s both}
+@keyframes barShow{0%,99%{opacity:1}100%{opacity:0}}
+.bar i{display:block;height:100%;background:var(--gold);transform-origin:left;animation:barGrow 15s linear 0s both}
+@keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="logo"><b>IDENEL</b><span>PROFESSIONAL</span></div>
+  <div class="bar"><i></i></div>
+</div>
+<script>
+const T = {
+  uz: {
+    s: [
+      { e: "IDENEL professional seminari", h: "Kosmetolog va dermatologlar diqqatiga!", sub: "Nazariya, amaliyot va professional skincare texnologiyalari" },
+      { e: "1-mavzu", h: "Mikroignalar bilan ishlash texnologiyalari" },
+      { e: "2-mavzu", h: "Uy parvarishi vositalarini to‘g‘ri tanlash" },
+      { e: "3-mavzu", h: "Nazariya va amaliyot — bir seminarda" },
+      { e: "Har bir ishtirokchiga", h: "Seminar sertifikati" },
+    ],
+    month: "oktabr", time: "09:00 · Toshkent", ctaH: "Bilimingizni boyiting",
+    pill: "O‘rinlar cheklangan — oldindan yoziling", btn: "Ro‘yxatdan o‘tish"
+  },
+  ru: {
+    s: [
+      { e: "Профессиональный семинар IDENEL", h: "Вниманию косметологов и дерматологов!", sub: "Теория, практика и профессиональные технологии ухода за кожей" },
+      { e: "Тема 1", h: "Технологии работы с микроиглами" },
+      { e: "Тема 2", h: "Подбор средств домашнего ухода" },
+      { e: "Тема 3", h: "Теория и практика — в одном семинаре" },
+      { e: "Каждому участнику", h: "Сертификат семинара" },
+    ],
+    month: "октября", time: "9:00 · Ташкент", ctaH: "Повысьте свою квалификацию",
+    pill: "Количество мест ограничено — запишитесь заранее", btn: "Зарегистрироваться"
+  }
+};
+// visuals per topic scene; --o staggers each product's entrance
+const P = (src, left, h, o) => `<img class="prod" src="assets/${src}.png" style="left:${left}px;height:${h}px;--o:${o}s">`;
+const V = [
+  `<img class="photo" src="assets/photo-presenter.jpg" style="object-position:58% 60%">`,
+  `<div class="plinth"></div>${P("needlekit", 345, 600, .3)}`,
+  `<div class="plinth"></div>${P("toner",190,500,.25)}${P("serum",350,440,.45)}${P("spf",505,480,.65)}${P("jar_moist",660,180,.85)}`,
+  `<div class="plinth"></div>${P("mist",170,440,.25)}${P("cc",300,480,.4)}${P("eyecream",470,500,.55)}${P("tube",570,470,.7)}${P("jar_repair",680,180,.85)}`,
+  `<img class="photo" src="assets/photo-certificate.jpg" style="object-position:50% 96%">`,
+];
+const SCENE = 3, CTA = 5;           // seconds per topic scene, CTA hold
+const lang = new URLSearchParams(location.search).get("lang") || "uz";
+const L = T[lang], st = document.getElementById("stage");
+L.s.forEach((s, i) => st.insertAdjacentHTML("beforeend", `
+  <section class="scene" style="--s:${i*SCENE}s;--d:${SCENE}s">
+    <div class="box">${V[i]}</div>
+    <div class="txt">
+      <div class="eyebrow up" style="--o:.25s">${s.e}</div>
+      <h1 class="up" style="--o:.4s">${s.h}</h1>
+      ${s.sub ? `<p class="sub up" style="--o:.6s">${s.sub}</p>` : ""}
+    </div>
+  </section>`));
+const cs = L.s.length * SCENE;
+st.insertAdjacentHTML("beforeend", `
+  <section class="scene last cta" style="--s:${cs}s;--d:${CTA}s">
+    <div class="bigdate">
+      <div class="d up" style="--o:.1s">31</div>
+      <div class="m up" style="--o:.3s">${L.month.toUpperCase()}</div>
+      <div class="t up" style="--o:.45s">${L.time}</div>
+      <div class="rule up" style="--o:.55s"></div>
+    </div>
+    <div class="h up" style="--o:.65s">${L.ctaH}</div>
+    <div class="pill up" style="--o:.85s"><span>${L.pill}</span></div>
+    <div class="btnw up" style="--o:1s"><div class="btn">${L.btn}
+      <svg width="40" height="22" viewBox="0 0 40 22" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11 H36"/><path d="M27 2 L36 11 L27 20"/></svg></div></div>
+  </section>`);
+window.DURATION = cs + CTA;
+</script>
+</body>
+</html>
